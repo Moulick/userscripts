@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Make GitHub PR and Issue Titles Clickable
 // @namespace    https://github.com/Moulick
-// @version      0.3
+// @version      0.4
 // @description  Make GitHub PR and Issue Titles Clickable
 // @author       Moulick Aggarwal
 // @supportURL   https://github.com/Moulick/userscripts/issues
@@ -22,6 +22,12 @@
     if (title) {
       document.querySelector('[data-testid="edit-issue-title-button"]')?.click()
       title.closest('h1[data-component="PH_Title"]')?.querySelector('button')?.click()
+    }
+  }, true)
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && document.activeElement.labels?.[0]?.textContent === 'Edit Pull Request Title') {
+      document.activeElement.closest('form')?.querySelector('button[type="button"]')?.click()
     }
   }, true)
 })();
